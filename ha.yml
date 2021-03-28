@@ -1,0 +1,51 @@
+- hosts: tag_name_loadbalancer
+  tasks:
+          - name: install haproxy
+            package:
+                    name: haproxy
+                    state: present
+
+          - name: configration of haproxy.cfg file
+            template:
+                    src: "/root/task12/haproxy.cfg"
+                    dest: "/etc/haproxy/haproxy.cfg"
+            notify:
+                    - Restart haproxy
+
+          - name: Starting haproxy service
+            service:
+                    name: haproxy
+                    state: started
+
+  handlers:
+          - name: Restart haproxy
+            service:
+                    name: haproxy
+                    state: restarted
+- hosts: tag_name_web_server
+  tasks:
+          - name: installing httpd software
+            package:
+                    name: httpd
+                    state: present
+
+          - name: copying content of web server
+            copy:
+                    content: "welcome to wolrd of automation"
+                    dest: /var/www/html/index.html
+            notify:
+                    - Restart httpd
+
+          - name: Starting httpd service
+            service:
+                    name: httpd
+                    state: started
+
+  handlers:
+          - name: Restart httpd
+            service:
+                    name: httpd
+                    state: restarted
+
+
+

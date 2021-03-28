@@ -1,0 +1,32 @@
+---
+- hosts: localhost
+  tasks:
+  - name: ec2
+    ec2:
+            region: ap-south-1
+            image: ami-0a9d27a9f4f5c0efc
+            instance_type: t2.micro
+            group_id: sg-042dcc8e0b5fe100e
+            key_name: task122
+            count: 1
+            instance_tags:
+                    name: loadbalancer
+            state: present
+            vpc_subnet_id: subnet-f8313090
+            aws_access_key: AKIAVPPBBZINI3S7CEEN
+            aws_secret_key: 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
+
+  - name: ec2
+    ec2:
+            region: ap-south-1
+            image: ami-0a9d27a9f4f5c0efc
+            instance_type: t2.micro
+            group_id: sg-042dcc8e0b5fe100e
+            key_name: task122
+            count: 3
+            instance_tags:
+                    name: web_server
+            state: present
+            vpc_subnet_id: subnet-f8313090
+            aws_access_key: AKIAVPPBBZINI3S7CEEN
+            aws_secret_key: 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
