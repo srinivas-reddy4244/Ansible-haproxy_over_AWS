@@ -3,7 +3,7 @@
   tasks:
   - name: ec2
     ec2:
-            region: ap-south-1
+            region: {{ region }}
             image: ami-0a9d27a9f4f5c0efc
             instance_type: t2.micro
             group_id: sg-042dcc8e0b5fe100e
@@ -13,12 +13,12 @@
                     name: loadbalancer
             state: present
             vpc_subnet_id: subnet-f8313090
-            aws_access_key: AKIAVPPBBZINI3S7CEEN
-            aws_secret_key: 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
+            aws_access_key: {{ ACCESS_KEY }}
+            aws_secret_key: {{ ACCESS_SECRET_KEY }}
 
   - name: ec2
     ec2:
-            region: ap-south-1
+            region: {{ region }}
             image: ami-0a9d27a9f4f5c0efc
             instance_type: t2.micro
             group_id: sg-042dcc8e0b5fe100e
@@ -28,5 +28,5 @@
                     name: web_server
             state: present
             vpc_subnet_id: subnet-f8313090
-            aws_access_key: AKIAVPPBBZINI3S7CEEN
-            aws_secret_key: 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
+            aws_access_key: {{ ACCESS_KEY }}
+            aws_secret_key: {{ ACCESS_SECRET_KEY }}
